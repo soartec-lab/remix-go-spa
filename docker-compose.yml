@@ -10,3 +10,4 @@ services:
     stdin_open: true
     ports:
       - "5174:5174"
+      - "4173:4173"
