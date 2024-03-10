@@ -19,6 +19,7 @@
     "swr": "^2.2.5"
   },
   "devDependencies": {
+    "@faker-js/faker": "^8.4.1",
     "@remix-run/dev": "^2.8.1",
     "@types/react": "^18.2.20",
     "@types/react-dom": "^18.2.7",
@@ -30,6 +31,7 @@
     "eslint-plugin-jsx-a11y": "^6.7.1",
     "eslint-plugin-react": "^7.33.2",
     "eslint-plugin-react-hooks": "^4.6.0",
+    "msw": "^2.2.3",
     "orval": "^6.25.0",
     "typescript": "^5.1.6",
     "vite": "^5.1.0",
