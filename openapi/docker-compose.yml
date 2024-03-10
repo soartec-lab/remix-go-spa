@@ -1,0 +1,18 @@
+version: '3.7'
+services:
+  swagger-ui:
+    image: swaggerapi/swagger-ui
+    volumes:
+      - ./merged/openapi/openapi.yaml:/usr/share/nginx/html/openapi.yml
+    environment:
+      API_URL: openapi.yml
+    ports:
+      - "8080:8080"
+  prism:
+    image: stoplight/prism:3
+    container_name: warifu-swagger-api
+    ports:
+      - "8081:4010"
+    command: mock -h 0.0.0.0 /openapi.yml
+    volumes:
+      - ./merged/openapi/openapi.yaml:/openapi.yml
