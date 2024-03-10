@@ -1,0 +1,31 @@
+get:
+  summary: Info for a specific pet
+  operationId: showPetById
+  tags:
+    - pets
+  parameters:
+    - name: petId
+      in: path
+      required: true
+      description: The id of the pet to retrieve
+      schema:
+        type: string
+    - name: page
+      in: query
+      required: true
+      description: pagination key number
+      schema:
+        type: string
+  responses:
+    '200':
+      description: Expected response to a valid request
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/pet.yml#/Pet'
+    default:
+      description: unexpected error
+      content:
+        application/json:
+          schema:
+            $ref: '../../schemas/response.yml#/Error'
