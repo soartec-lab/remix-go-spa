@@ -24,6 +24,7 @@ import type {
   Error,
   ListPetsParams,
   Pet,
+  Pets,
   ShowPetByIdParams
 } from '.././models'
 
@@ -34,7 +35,7 @@ import type {
  */
 export const listPets = (
     params?: ListPetsParams, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<Pet>> => {
+ ): Promise<AxiosResponse<Pets>> => {
     return axios.get(
       `http://localhost:8081/pets`,{
     ...options,
@@ -76,11 +77,11 @@ export const useListPets = <TError = AxiosError<Error>>(
  * @summary Create a pet
  */
 export const createPets = (
-    pet: Pet, options?: AxiosRequestConfig
+    pets: Pets, options?: AxiosRequestConfig
  ): Promise<AxiosResponse<void>> => {
     return axios.post(
       `http://localhost:8081/pets`,
-      pet,options
+      pets,options
     );
   }
 
@@ -88,7 +89,7 @@ export const createPets = (
 
 export const getCreatePetsMutationFetcher = ( options?: AxiosRequestConfig) => {
   return (_: string, { arg }: { arg: Arguments }): Promise<AxiosResponse<void>> => {
-    return createPets(arg as Pet, options);
+    return createPets(arg as Pets, options);
   }
 }
 export const getCreatePetsMutationKey = () => `http://localhost:8081/pets` as const;

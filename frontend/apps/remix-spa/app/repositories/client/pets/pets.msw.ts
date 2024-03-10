@@ -13,15 +13,16 @@ import {
   http
 } from 'msw'
 import type {
-  Pet
+  Pet,
+  Pets
 } from '.././models'
 
-export const getListPetsResponseMock = (overrideResponse: any = {}): Pet => ({id: faker.number.int({min: undefined, max: undefined}), name: faker.word.sample(), tag: faker.helpers.arrayElement([faker.word.sample(), undefined]), ...overrideResponse})
+export const getListPetsResponseMock = (overrideResponse: any = {}): Pets => (Array.from({ length: faker.number.int({ min: 1, max: 10 }) }, (_, i) => i + 1).map(() => ({id: faker.number.int({min: undefined, max: undefined}), name: faker.word.sample(), tag: faker.helpers.arrayElement([faker.word.sample(), undefined]), ...overrideResponse})))
 
 export const getShowPetByIdResponseMock = (overrideResponse: any = {}): Pet => ({id: faker.number.int({min: undefined, max: undefined}), name: faker.word.sample(), tag: faker.helpers.arrayElement([faker.word.sample(), undefined]), ...overrideResponse})
 
 
-export const getListPetsMockHandler = (overrideResponse?: Pet) => {
+export const getListPetsMockHandler = (overrideResponse?: Pets) => {
   return http.get('*/pets', async () => {
     await delay(0);
     return new HttpResponse(JSON.stringify(overrideResponse ? overrideResponse : getListPetsResponseMock()),

@@ -24,7 +24,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/Pet'
+                $ref: '#/components/schemas/Pets'
           description: A paged array of pets
           headers:
             x-next:
@@ -46,7 +46,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/Pet'
+              $ref: '#/components/schemas/Pets'
         description: post body
         required: true
       responses:
@@ -95,6 +95,11 @@ paths:
       - pets
 components:
   schemas:
+    Pets:
+      items:
+        $ref: '#/components/schemas/Pet'
+      maxItems: 100
+      type: array
     Pet:
       example:
         name: name

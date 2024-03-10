@@ -23,7 +23,7 @@ get:
       content:
         application/json:
           schema:
-            $ref: '../schemas/pet.yml#/Pet'
+            $ref: '../schemas/pet.yml#/Pets'
     default:
       description: unexpected error
       content:
@@ -41,7 +41,7 @@ post:
     content:
       application/json:
         schema:
-          $ref: '../schemas/pet.yml#/Pet'
+          $ref: '../schemas/pet.yml#/Pets'
   responses:
     '201':
       description: Null response

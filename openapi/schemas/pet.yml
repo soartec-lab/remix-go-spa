@@ -16,4 +16,4 @@ Pets:
   type: array
   maxItems: 100
   items:
-    $ref: '#Pet'
+    $ref: '#/Pet'
