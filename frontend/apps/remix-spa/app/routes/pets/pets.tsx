@@ -1,20 +1,27 @@
-import { useState } from "react"
-import { Flex, Button } from '@radix-ui/themes';
+import { Table } from '@radix-ui/themes';
+
+import { useListPets } from '~/repositories/client/pets/pets'
 
 export default function Pets() {
-  const [count, setCount] = useState(0)
+  const { data: petsData } = useListPets();
 
   return (
-    <div>
-      <Flex direction="column" gap="2">
-        <Button>Let's go</Button>
-      </Flex>
-
-      <h1>Pets</h1>
-      <p>
-        Count: {count}
-      </p>
-      <button onClick={() => setCount(count + 1)}>Increment</button>
-    </div>
+    <Table.Root>
+      <Table.Header>
+        <Table.Row>
+          <Table.ColumnHeaderCell>id</Table.ColumnHeaderCell>
+          <Table.ColumnHeaderCell>name</Table.ColumnHeaderCell>
+        </Table.Row>
+      </Table.Header>
+    
+      <Table.Body>
+        { petsData && petsData.data.map((pet) => (
+          <Table.Row>
+            <Table.RowHeaderCell>{pet.id}</Table.RowHeaderCell>
+            <Table.Cell>{pet.name}</Table.Cell>
+          </Table.Row>
+        ))}
+      </Table.Body>
+    </Table.Root>
   );
 }
