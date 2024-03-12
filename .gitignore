@@ -1,3 +1,5 @@
 frontend/**/.yarn/*
 frontend/.pnp.*
 frontend/node_modules/
+
+.DS_Store
