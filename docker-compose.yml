@@ -9,5 +9,6 @@ services:
     tty: true
     stdin_open: true
     ports:
-      - "5174:5174"
-      - "4173:4173"
+      - "5174:5174" # remix dev server
+      - "4173:4173" # vite preview server
+      - "8808:8808" # gin server
