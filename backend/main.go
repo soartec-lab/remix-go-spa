@@ -17,9 +17,9 @@ func main() {
 
 	r := gin.Default()
 
-	petStore := api.NewPetStore()
-	petStoreStrictHandler := api.NewStrictHandler(petStore, nil)
-	api.RegisterHandlers(r, petStoreStrictHandler)
+	controller := api.NewController()
+	strictHandler := api.NewStrictHandler(controller, nil)
+	api.RegisterHandlers(r, strictHandler)
 
 	s := &http.Server{
 		Handler: r,
