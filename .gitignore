@@ -3,3 +3,5 @@ frontend/.pnp.*
 frontend/node_modules/
 
 .DS_Store
+
+db/mysql_data

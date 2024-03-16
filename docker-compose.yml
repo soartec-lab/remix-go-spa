@@ -12,3 +12,12 @@ services:
       - "5174:5174" # remix dev server
       - "4173:4173" # vite preview server
       - "8808:8808" # gin server
+  mysql:
+    platform: linux/x86_64
+    image: mysql:8
+    environment:
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - 3306:3306
+    volumes:
+      - ./db/mysql_data:/var/lib/mysql
