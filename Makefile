@@ -1,8 +1,14 @@
+#
+# install backend tools
+#
 .PHONY: install
 install:
 	go install github.com/deepmap/oapi-codegen/v2/cmd/oapi-codegen@latest \
 		&& go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
+#
+# generate openapi
+#
 .PHONY: openapi-merge
 openapi-merge:
 	docker run --rm -v "$(PWD):/workspace" \
@@ -16,9 +22,16 @@ oapi-gen:
 	oapi-codegen -config config/oapi-codegen/types.yml ./openapi/merged/openapi/openapi.yaml \
 		&& oapi-codegen -config config/oapi-codegen/server.yml ./openapi/merged/openapi/openapi.yaml
 
+#
+# database commands
+#
 .PHONY: db-login
 db-login:
 	mysql -h mysql -u root -ppassword
+
+.PHONY: db-setup
+db-setup:
+	make db-create && make db-migrate && make db-seed
 
 .PHONY: g-migrate
 g-migrate:
@@ -43,3 +56,7 @@ db-rollback:
 .PHONY: db-reset
 db-reset:
 	make db-drop && make db-create && make db-migrate
+
+.PHONY: db-seed
+db-seed:
+	cd backend && go run seed.go
