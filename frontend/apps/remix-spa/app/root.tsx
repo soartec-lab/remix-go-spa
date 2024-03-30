@@ -7,6 +7,8 @@ import {
 } from "@remix-run/react";
 import '@radix-ui/themes/styles.css';
 import { Theme } from '@radix-ui/themes';
+import styles from "./tailwind.css"
+import type { LinksFunction } from "@remix-run/node";
 
 export function Layout({ children }: { children: React.ReactNode }) {
   return (
@@ -35,3 +37,7 @@ export default function App() {
 export function HydrateFallback() {
   return <p>Loading...</p>;
 }
+
+export const links: LinksFunction = () => [
+  { rel: "stylesheet", href: styles },
+];
