@@ -6,8 +6,8 @@
  */
 
 export type ShowPetByIdParams = {
-/**
- * pagination key number
- */
-page: string;
+	/**
+	 * pagination key number
+	 */
+	page: string;
 };

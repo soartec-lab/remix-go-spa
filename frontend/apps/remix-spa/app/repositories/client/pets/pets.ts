@@ -4,161 +4,179 @@
  * Swagger Petstore
  * OpenAPI spec version: 1.0.0
  */
-import axios from 'axios'
+import axios from "axios";
+import type { AxiosError, AxiosRequestConfig, AxiosResponse } from "axios";
+import useSwr from "swr";
+import type { Arguments, Key, SWRConfiguration } from "swr";
+import useSWRMutation from "swr/mutation";
+import type { SWRMutationConfiguration } from "swr/mutation";
 import type {
-  AxiosError,
-  AxiosRequestConfig,
-  AxiosResponse
-} from 'axios'
-import useSwr from 'swr'
-import type {
-  Arguments,
-  Key,
-  SWRConfiguration
-} from 'swr'
-import useSWRMutation from 'swr/mutation'
-import type {
-  SWRMutationConfiguration
-} from 'swr/mutation'
-import type {
-  Error,
-  ListPetsParams,
-  Pet,
-  Pets,
-  ShowPetByIdParams
-} from '.././models'
+	Error,
+	ListPetsParams,
+	Pet,
+	Pets,
+	ShowPetByIdParams,
+} from ".././models";
 
-
-  
-  /**
+/**
  * @summary List all pets
  */
 export const listPets = (
-    params?: ListPetsParams, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<Pets>> => {
-    return axios.get(
-      `http://localhost:8081/pets`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
+	params?: ListPetsParams,
+	options?: AxiosRequestConfig,
+): Promise<AxiosResponse<Pets>> => {
+	return axios.get(`http://localhost:8081/pets`, {
+		...options,
+		params: { ...params, ...options?.params },
+	});
+};
 
+export const getListPetsKey = (params?: ListPetsParams) =>
+	[`http://localhost:8081/pets`, ...(params ? [params] : [])] as const;
 
-
-export const getListPetsKey = (params?: ListPetsParams,) => [`http://localhost:8081/pets`, ...(params ? [params]: [])] as const;
-
-
-export type ListPetsQueryResult = NonNullable<Awaited<ReturnType<typeof listPets>>>
-export type ListPetsQueryError = AxiosError<Error>
+export type ListPetsQueryResult = NonNullable<
+	Awaited<ReturnType<typeof listPets>>
+>;
+export type ListPetsQueryError = AxiosError<Error>;
 
 /**
  * @summary List all pets
  */
 export const useListPets = <TError = AxiosError<Error>>(
-  params?: ListPetsParams, options?: { swr?:SWRConfiguration<Awaited<ReturnType<typeof listPets>>, TError> & { swrKey?: Key, enabled?: boolean }, axios?: AxiosRequestConfig }
+	params?: ListPetsParams,
+	options?: {
+		swr?: SWRConfiguration<Awaited<ReturnType<typeof listPets>>, TError> & {
+			swrKey?: Key;
+			enabled?: boolean;
+		};
+		axios?: AxiosRequestConfig;
+	},
 ) => {
-  const {swr: swrOptions, axios: axiosOptions} = options ?? {}
+	const { swr: swrOptions, axios: axiosOptions } = options ?? {};
 
-  const isEnabled = swrOptions?.enabled !== false
-  const swrKey = swrOptions?.swrKey ?? (() => isEnabled ? getListPetsKey(params) : null);
-  const swrFn = () => listPets(params, axiosOptions);
+	const isEnabled = swrOptions?.enabled !== false;
+	const swrKey =
+		swrOptions?.swrKey ?? (() => (isEnabled ? getListPetsKey(params) : null));
+	const swrFn = () => listPets(params, axiosOptions);
 
-  const query = useSwr<Awaited<ReturnType<typeof swrFn>>, TError>(swrKey, swrFn, {
-    
-    ...swrOptions
-  })
+	const query = useSwr<Awaited<ReturnType<typeof swrFn>>, TError>(
+		swrKey,
+		swrFn,
+		{
+			...swrOptions,
+		},
+	);
 
-  return {
-    swrKey,
-    ...query
-  }
-}
+	return {
+		swrKey,
+		...query,
+	};
+};
 /**
  * @summary Create a pet
  */
 export const createPets = (
-    pets: Pets, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<void>> => {
-    return axios.post(
-      `http://localhost:8081/pets`,
-      pets,options
-    );
-  }
+	pets: Pets,
+	options?: AxiosRequestConfig,
+): Promise<AxiosResponse<void>> => {
+	return axios.post(`http://localhost:8081/pets`, pets, options);
+};
 
+export const getCreatePetsMutationFetcher = (options?: AxiosRequestConfig) => {
+	return (
+		_: string,
+		{ arg }: { arg: Arguments },
+	): Promise<AxiosResponse<void>> => {
+		return createPets(arg as Pets, options);
+	};
+};
+export const getCreatePetsMutationKey = () =>
+	`http://localhost:8081/pets` as const;
 
-
-export const getCreatePetsMutationFetcher = ( options?: AxiosRequestConfig) => {
-  return (_: string, { arg }: { arg: Arguments }): Promise<AxiosResponse<void>> => {
-    return createPets(arg as Pets, options);
-  }
-}
-export const getCreatePetsMutationKey = () => `http://localhost:8081/pets` as const;
-
-export type CreatePetsMutationResult = NonNullable<Awaited<ReturnType<typeof createPets>>>
-export type CreatePetsMutationError = AxiosError<Error>
+export type CreatePetsMutationResult = NonNullable<
+	Awaited<ReturnType<typeof createPets>>
+>;
+export type CreatePetsMutationError = AxiosError<Error>;
 
 /**
  * @summary Create a pet
  */
-export const useCreatePets = <TError = AxiosError<Error>>(
-   options?: { swr?:SWRMutationConfiguration<Awaited<ReturnType<typeof createPets>>, TError, string, Arguments, Awaited<ReturnType<typeof createPets>>> & { swrKey?: string }, axios?: AxiosRequestConfig }
-) => {
+export const useCreatePets = <TError = AxiosError<Error>>(options?: {
+	swr?: SWRMutationConfiguration<
+		Awaited<ReturnType<typeof createPets>>,
+		TError,
+		string,
+		Arguments,
+		Awaited<ReturnType<typeof createPets>>
+	> & { swrKey?: string };
+	axios?: AxiosRequestConfig;
+}) => {
+	const { swr: swrOptions, axios: axiosOptions } = options ?? {};
 
-  const {swr: swrOptions, axios: axiosOptions} = options ?? {}
+	const swrKey = swrOptions?.swrKey ?? getCreatePetsMutationKey();
+	const swrFn = getCreatePetsMutationFetcher(axiosOptions);
 
-  const swrKey = swrOptions?.swrKey ?? getCreatePetsMutationKey();
-  const swrFn = getCreatePetsMutationFetcher(axiosOptions);
+	const query = useSWRMutation(swrKey, swrFn, swrOptions);
 
-  const query = useSWRMutation(swrKey, swrFn, swrOptions)
-
-  return {
-    swrKey,
-    ...query
-  }
-}
+	return {
+		swrKey,
+		...query,
+	};
+};
 /**
  * @summary Info for a specific pet
  */
 export const showPetById = (
-    petId: string,
-    params: ShowPetByIdParams, options?: AxiosRequestConfig
- ): Promise<AxiosResponse<Pet>> => {
-    return axios.get(
-      `http://localhost:8081/pets/${petId}`,{
-    ...options,
-        params: {...params, ...options?.params},}
-    );
-  }
+	petId: string,
+	params: ShowPetByIdParams,
+	options?: AxiosRequestConfig,
+): Promise<AxiosResponse<Pet>> => {
+	return axios.get(`http://localhost:8081/pets/${petId}`, {
+		...options,
+		params: { ...params, ...options?.params },
+	});
+};
 
+export const getShowPetByIdKey = (petId: string, params: ShowPetByIdParams) =>
+	[`http://localhost:8081/pets/${petId}`, ...(params ? [params] : [])] as const;
 
-
-export const getShowPetByIdKey = (petId: string,
-    params: ShowPetByIdParams,) => [`http://localhost:8081/pets/${petId}`, ...(params ? [params]: [])] as const;
-
-
-export type ShowPetByIdQueryResult = NonNullable<Awaited<ReturnType<typeof showPetById>>>
-export type ShowPetByIdQueryError = AxiosError<Error>
+export type ShowPetByIdQueryResult = NonNullable<
+	Awaited<ReturnType<typeof showPetById>>
+>;
+export type ShowPetByIdQueryError = AxiosError<Error>;
 
 /**
  * @summary Info for a specific pet
  */
 export const useShowPetById = <TError = AxiosError<Error>>(
-  petId: string,
-    params: ShowPetByIdParams, options?: { swr?:SWRConfiguration<Awaited<ReturnType<typeof showPetById>>, TError> & { swrKey?: Key, enabled?: boolean }, axios?: AxiosRequestConfig }
+	petId: string,
+	params: ShowPetByIdParams,
+	options?: {
+		swr?: SWRConfiguration<Awaited<ReturnType<typeof showPetById>>, TError> & {
+			swrKey?: Key;
+			enabled?: boolean;
+		};
+		axios?: AxiosRequestConfig;
+	},
 ) => {
-  const {swr: swrOptions, axios: axiosOptions} = options ?? {}
+	const { swr: swrOptions, axios: axiosOptions } = options ?? {};
 
-  const isEnabled = swrOptions?.enabled !== false && !!(petId)
-  const swrKey = swrOptions?.swrKey ?? (() => isEnabled ? getShowPetByIdKey(petId,params) : null);
-  const swrFn = () => showPetById(petId,params, axiosOptions);
+	const isEnabled = swrOptions?.enabled !== false && !!petId;
+	const swrKey =
+		swrOptions?.swrKey ??
+		(() => (isEnabled ? getShowPetByIdKey(petId, params) : null));
+	const swrFn = () => showPetById(petId, params, axiosOptions);
 
-  const query = useSwr<Awaited<ReturnType<typeof swrFn>>, TError>(swrKey, swrFn, {
-    
-    ...swrOptions
-  })
+	const query = useSwr<Awaited<ReturnType<typeof swrFn>>, TError>(
+		swrKey,
+		swrFn,
+		{
+			...swrOptions,
+		},
+	);
 
-  return {
-    swrKey,
-    ...query
-  }
-}
+	return {
+		swrKey,
+		...query,
+	};
+};

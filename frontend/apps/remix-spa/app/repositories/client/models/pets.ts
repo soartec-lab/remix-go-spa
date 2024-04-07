@@ -4,6 +4,6 @@
  * Swagger Petstore
  * OpenAPI spec version: 1.0.0
  */
-import type { Pet } from './pet';
+import type { Pet } from "./pet";
 
 export type Pets = Pet[];
