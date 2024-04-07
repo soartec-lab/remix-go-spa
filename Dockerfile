@@ -8,5 +8,6 @@ RUN apt-get update -qq && apt-get install -y \
     nodejs \
     default-mysql-client
 RUN curl -fsSL https://bun.sh/install | bash
+RUN export PATH=$PATH:~/.bun/bin
 RUN corepack enable
 CMD sh -c "/bin/bash"
