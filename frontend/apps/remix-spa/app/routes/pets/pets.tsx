@@ -16,7 +16,7 @@ export default function Pets() {
 
 			<Table.Body>
 				{petsData?.data.map((pet) => (
-					<Table.Row>
+					<Table.Row key={pet.id}>
 						<Table.RowHeaderCell>{pet.id}</Table.RowHeaderCell>
 						<Table.Cell>{pet.name}</Table.Cell>
 					</Table.Row>
