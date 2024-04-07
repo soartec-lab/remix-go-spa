@@ -26,6 +26,7 @@
     "tailwindcss-animate": "^1.0.7"
   },
   "devDependencies": {
+    "@biomejs/biome": "1.6.4",
     "@faker-js/faker": "^8.4.1",
     "@remix-run/dev": "^2.8.1",
     "@types/react": "^18.2.20",
