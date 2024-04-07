@@ -6,7 +6,8 @@
   "scripts": {
     "build": "remix vite:build",
     "dev": "remix vite:dev --port 5174 --host",
-    "lint": "eslint --ignore-path .gitignore --cache --cache-location ./node_modules/.cache/eslint .",
+    "lint": "biome check .",
+    "lint:fix": "biome check . --apply",
     "preview": "vite preview --host",
     "typecheck": "tsc"
   },
