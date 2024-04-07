@@ -1,3 +1,5 @@
+import { Theme } from "@radix-ui/themes";
+import "@radix-ui/themes/styles.css";
 import {
 	Links,
 	Meta,
@@ -5,8 +7,6 @@ import {
 	Scripts,
 	ScrollRestoration,
 } from "@remix-run/react";
-import "@radix-ui/themes/styles.css";
-import { Theme } from "@radix-ui/themes";
 import "./tailwind.css";
 
 export function Layout({ children }: { children: React.ReactNode }) {

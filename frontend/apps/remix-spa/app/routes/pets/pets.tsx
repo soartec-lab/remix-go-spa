@@ -15,13 +15,12 @@ export default function Pets() {
 			</Table.Header>
 
 			<Table.Body>
-				{petsData &&
-					petsData.data.map((pet) => (
-						<Table.Row>
-							<Table.RowHeaderCell>{pet.id}</Table.RowHeaderCell>
-							<Table.Cell>{pet.name}</Table.Cell>
-						</Table.Row>
-					))}
+				{petsData?.data.map((pet) => (
+					<Table.Row>
+						<Table.RowHeaderCell>{pet.id}</Table.RowHeaderCell>
+						<Table.Cell>{pet.name}</Table.Cell>
+					</Table.Row>
+				))}
 			</Table.Body>
 		</Table.Root>
 	);

@@ -7,7 +7,7 @@
 		"build": "remix vite:build",
 		"dev": "remix vite:dev --port 5174 --host",
 		"lint": "biome check .",
-		"lint:fix": "biome check . --apply",
+		"lint:fix": "biome check --apply .",
 		"preview": "vite preview --host",
 		"typecheck": "tsc"
 	},
