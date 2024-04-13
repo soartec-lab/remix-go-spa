@@ -11,6 +11,10 @@
 		"rules": {
 			"recommended": true
 		},
-		"ignore": ["app/repositories/client/*", "app/components/ui/*.tsx"]
+		"ignore": [
+			"app/repositories/client/*",
+			"app/components/ui/*.tsx",
+			"app/components/ui/*.ts"
+		]
 	}
 }
