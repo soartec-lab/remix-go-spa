@@ -1,3 +1,3 @@
 .PHONY: add-component
 add-component:
-	yarn dlx shadcn-ui@latest add
+	bunx shadcn-ui@latest add
