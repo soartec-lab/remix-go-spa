@@ -14,8 +14,27 @@ import {
   FormMessage,
 } from "~/components/ui/form"
 import { Input } from "~/components/ui/input"
+import { Toaster } from "~/components/ui/toaster"
+import { useToast } from "~/components/ui/use-toast"
+import { useCreatePets, CreatePetsMutationResult } from "~/repositories/client/pets/pets"
 
 export default function PetCreateFrom() {
+  const { toast } = useToast()
+  const { trigger } = useCreatePets()
+
+  const options = {
+    onSuccess(data: CreatePetsMutationResult) {
+      toast({
+        title: "create pet success !",
+        description: "create pet success description.",
+      })
+    },
+  };
+
+  const onSubmit = (values: z.infer<typeof createPetsBodyItem>) => {
+    trigger([values], options)
+  }
+
   const form = useForm<z.infer<typeof createPetsBodyItem>>({
     resolver: zodResolver(createPetsBodyItem),
     defaultValues: {
@@ -24,10 +43,6 @@ export default function PetCreateFrom() {
       tag: "tag",
     },
   })
-
-  const onSubmit = (values: z.infer<typeof createPetsBodyItem>) => {
-    console.log(values)
-  }
 
 	return (
     <>
@@ -90,6 +105,8 @@ export default function PetCreateFrom() {
           <Button type="submit">Submit</Button>
         </form>
       </Form>
+
+      <Toaster />
     </>
 	);
 }
