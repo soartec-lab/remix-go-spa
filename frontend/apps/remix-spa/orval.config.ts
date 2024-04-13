@@ -20,4 +20,14 @@ export default defineConfig({
 			},
 		},
 	},
+	remixSpaZod: {
+		input: {
+			target: "../../../openapi/merged/openapi/openapi.yaml",
+		},
+		output: {
+			mode: "tags-split",
+			client: "zod",
+			target: "app/repositories/client/zod",
+		},
+	},
 });
