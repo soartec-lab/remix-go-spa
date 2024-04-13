@@ -1,7 +1,7 @@
 import { Outlet } from "@remix-run/react";
 
-import Pets from "./pets";
 import PetCreateFrom from "./pet-create-form";
+import Pets from "./pets";
 
 export default function PetsPage() {
 	return (
