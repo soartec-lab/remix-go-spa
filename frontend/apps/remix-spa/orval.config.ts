@@ -27,6 +27,17 @@ export default defineConfig({
 			mode: "tags-split",
 			client: "zod",
 			target: "app/repositories/client/zod",
+			override: {
+				zod: {
+					strict: {
+						response: true,
+						query: true,
+						param: true,
+						header: true,
+						body: true,
+					},
+				},
+			},
 		},
 	},
 });
