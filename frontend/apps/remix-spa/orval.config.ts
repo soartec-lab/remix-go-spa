@@ -12,7 +12,6 @@ export default defineConfig({
 			// NOTE: ローカル開発環境で`mock`サーバーを起動しているときは`baseUrl`を変更する
 			baseUrl: "http://localhost:8081",
 			client: "swr",
-			prettier: true,
 			clean: true,
 			mock: {
 				type: "msw",
