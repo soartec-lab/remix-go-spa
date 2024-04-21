@@ -1,8 +1,9 @@
 #
-# install backend tools
+# install deps
 #
 .PHONY: install
 install:
+	bun install --frozen-lockfile && \
 	go install github.com/deepmap/oapi-codegen/v2/cmd/oapi-codegen@latest \
 		&& go install -tags mysql github.com/golang-migrate/migrate/v4/cmd/migrate@latest
 
