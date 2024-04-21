@@ -2,12 +2,13 @@ package api
 
 import (
 	"context"
+
 	"gorm.io/gorm"
 
 	"github.com/soartec-lab/remix-go-spa/model"
 )
 
-type Controller struct {}
+type Controller struct{}
 
 func NewController() *Controller {
 	return &Controller{}
@@ -33,7 +34,7 @@ func (c *Controller) ListPets(ctx context.Context, request ListPetsRequestObject
 	}
 
 	res := ListPets200JSONResponse{
-		Body: responsePets,
+		Body:    responsePets,
 		Headers: ListPets200ResponseHeaders{},
 	}
 

@@ -1,11 +1,11 @@
 package model
 
 import (
-  "gorm.io/gorm"
+	"gorm.io/gorm"
 )
 
 type Pet struct {
-  gorm.Model
-  Name string
-  Tag string
+	gorm.Model
+	Name string
+	Tag  string
 }
