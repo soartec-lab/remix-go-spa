@@ -40,9 +40,9 @@
         }
       },
       "extensions": [
-        "biomejs.biome",
         "github.copilot",
         "github.copilot-chat",
+        "biomejs.biome",
         "golang.go"
       ]
     }
