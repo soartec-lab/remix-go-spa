@@ -26,7 +26,8 @@ export default defineConfig({
 		output: {
 			mode: "tags-split",
 			client: "zod",
-			target: "app/repositories/client/zod",
+			target: "app/repositories/client",
+			fileExtension: ".zod.ts",
 			override: {
 				zod: {
 					strict: {
