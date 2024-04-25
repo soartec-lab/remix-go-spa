@@ -19,7 +19,7 @@ import {
 	type CreatePetsMutationResult,
 	useCreatePets,
 } from "~/repositories/client/pets/pets";
-import { createPetsBodyItem } from "~/repositories/client/zod/pets/pets";
+import { createPetsBodyItem } from "~/repositories/client/pets/pets.zod";
 
 export default function PetCreateFrom() {
 	const { toast } = useToast();
