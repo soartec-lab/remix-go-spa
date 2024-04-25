@@ -66,7 +66,6 @@ export default function PetCreateFrom() {
 										type="number"
 										placeholder="please input"
 										{...field}
-										{...form.register("id", { valueAsNumber: true })}
 									/>
 								</FormControl>
 								<FormDescription>This is your pet id.</FormDescription>
