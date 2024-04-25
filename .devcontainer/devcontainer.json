@@ -2,8 +2,8 @@
   "name": "remix-go-spa",
   "postCreateCommand": "bash ./.devcontainer/post-create.sh",
   "dockerComposeFile": [
-    "../docker-compose.yml",
-    "../openapi/docker-compose.yml"
+    "../compose.yml",
+    "../openapi/compose.yml"
   ],
   "service": "app",
   "workspaceFolder": "/app",
