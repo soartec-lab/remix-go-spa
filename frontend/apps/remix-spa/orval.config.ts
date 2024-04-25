@@ -39,6 +39,13 @@ export default defineConfig({
 						header: true,
 						body: true,
 					},
+					coerce: {
+						response: true,
+						query: true,
+						param: true,
+						header: true,
+						body: true,
+					},
 				},
 			},
 		},
