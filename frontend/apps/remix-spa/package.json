@@ -9,7 +9,6 @@
 		"lint": "biome check .",
 		"lint:fix": "biome check --apply .",
 		"preview": "vite preview --host",
-		"orval": "orval && bun lint:fix",
 		"typecheck": "tsc"
 	},
 	"dependencies": {
