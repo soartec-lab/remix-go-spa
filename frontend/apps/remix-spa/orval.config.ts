@@ -13,6 +13,7 @@ export default defineConfig({
 			baseUrl: "http://localhost:8081",
 			client: "swr",
 			clean: true,
+			biome: true,
 			mock: {
 				type: "msw",
 				delay: 0,
@@ -28,6 +29,7 @@ export default defineConfig({
 			client: "zod",
 			target: "app/repositories/client",
 			fileExtension: ".zod.ts",
+			biome: true,
 			override: {
 				zod: {
 					strict: {
