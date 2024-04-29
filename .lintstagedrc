@@ -1,0 +1,3 @@
+{
+  "./frontend/*": "bun --filter '*' lint"
+}
