@@ -62,11 +62,7 @@ export default function PetCreateFrom() {
 							<FormItem>
 								<FormLabel>id</FormLabel>
 								<FormControl>
-									<Input
-										type="number"
-										placeholder="please input"
-										{...field}
-									/>
+									<Input type="number" placeholder="please input" {...field} />
 								</FormControl>
 								<FormDescription>This is your pet id.</FormDescription>
 								<FormMessage />
