@@ -49,7 +49,7 @@ export default function PetCreateFrom() {
 
 	return (
 		<>
-			<h1 className="tw-scroll-m-20 tw-text-4xl tw-font-extrabold tw-tracking-tight tw-lg:text-5xl">
+			<h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
 				Create Pet Form
 			</h1>
 
