@@ -49,10 +49,9 @@ export default function PetCreateFrom() {
 
 	return (
 		<>
-			<h1 className="scroll-m-20 text-4xl font-extrabold tracking-tight lg:text-5xl">
-				Create Pet Form
-			</h1>
-
+			<h2 className="scroll-m-20 text-4xl font-extrabold tracking-tight">
+				Pet create form
+			</h2>
 			<Form {...form}>
 				<form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
 					<FormField
