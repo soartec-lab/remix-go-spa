@@ -2,7 +2,7 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import type { z } from "zod";
 
-import { Button } from "~/components/ui/button";
+import { Button } from "~/components/shadcn-ui/button";
 import {
 	Form,
 	FormControl,
@@ -11,10 +11,10 @@ import {
 	FormItem,
 	FormLabel,
 	FormMessage,
-} from "~/components/ui/form";
-import { Input } from "~/components/ui/input";
-import { Toaster } from "~/components/ui/toaster";
-import { useToast } from "~/components/ui/use-toast";
+} from "~/components/shadcn-ui/form";
+import { Input } from "~/components/shadcn-ui/input";
+import { Toaster } from "~/components/shadcn-ui/toaster";
+import { useToast } from "~/components/shadcn-ui/use-toast";
 import {
 	type CreatePetsMutationResult,
 	useCreatePets,

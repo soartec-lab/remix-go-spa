@@ -13,8 +13,8 @@
 		},
 		"ignore": [
 			"app/repositories/client/*",
-			"app/components/ui/*.tsx",
-			"app/components/ui/*.ts"
+			"app/components/shadcn-ui/*.tsx",
+			"app/components/shadcn-ui/*.ts"
 		]
 	}
 }

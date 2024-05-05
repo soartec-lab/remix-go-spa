@@ -1,4 +1,4 @@
-import { Button } from "~/components/ui/button";
+import { Button } from "~/components/shadcn-ui/button";
 import type { Pet as PetType } from "~/repositories/client/models";
 
 type Props = {
