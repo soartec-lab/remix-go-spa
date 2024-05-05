@@ -2,7 +2,7 @@ import { Table } from "@radix-ui/themes";
 
 import { useListPets } from "~/repositories/client/pets/pets";
 
-export default function Pets() {
+export default function PetsTable() {
 	const { data: petsData } = useListPets();
 
 	return (

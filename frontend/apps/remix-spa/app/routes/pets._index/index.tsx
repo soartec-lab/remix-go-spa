@@ -1,10 +1,10 @@
 import PetCreateFrom from "./pet-create-form";
-import Pets from "./pets";
+import PetsTable from "./pets-table";
 
 export default function PetsPage() {
 	return (
 		<div className="columns-1">
-			<Pets />
+			<PetsTable />
 			<PetCreateFrom />
 		</div>
 	);

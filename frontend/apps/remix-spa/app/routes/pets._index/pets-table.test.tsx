@@ -3,9 +3,9 @@ import { cleanup, render, screen, waitFor } from "@testing-library/react";
 import { setupServer } from "msw/node";
 import { SWRConfig } from "swr";
 
-import type { Pets as PetsModel } from "~/repositories/client/models";
+import type { Pets } from "~/repositories/client/models";
 import { getListPetsMockHandler } from "~/repositories/client/pets/pets.msw";
-import Pets from "./pets";
+import PetsTable from "./pets-table";
 
 const server = setupServer();
 
@@ -20,7 +20,7 @@ afterAll(() => server.close());
 
 describe("Pets", () => {
 	it("should render a table with the pets data", async () => {
-		const pets: PetsModel = [{ id: 1, name: "pet1" }];
+		const pets: Pets = [{ id: 1, name: "pet1" }];
 
 		const mock = [getListPetsMockHandler(pets)];
 
@@ -28,7 +28,7 @@ describe("Pets", () => {
 
 		render(
 			<SWRConfig value={{ provider: () => new Map() }}>
-				<Pets />
+				<PetsTable />
 			</SWRConfig>,
 		);
 
