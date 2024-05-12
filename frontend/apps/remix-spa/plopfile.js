@@ -20,16 +20,16 @@ export default function (plop) {
 			{
 				when: (data) => data["component-type"] === "route",
 				type: "input",
-				name: "route-name",
+				name: "route-path",
 				message: `What is component name?
 
 ex)
 
-| URL          | component name    |
-|--------------|-------------------|
-| /users       | users._index      |
-| /users/posts | users.posts_index |
-| users/:id    | users.$id         |
+| URL          | route you need to input | create component name |
+|--------------|-------------------------|-----------------------|
+| /users       | users._index            | UsersRoute            |
+| /users/posts | users.posts._index      | UsersPostsRoute       |
+| users/:id    | users.$id               | UserRoute             |
 
 ?`,
 				validate: (value) => {
@@ -43,7 +43,7 @@ ex)
 			{
 				when: (data) => data["component-type"] === "feature",
 				type: "input",
-				name: "feature-name",
+				name: "feature-path",
 				message: `What is component name?
 
 ex)
@@ -64,28 +64,48 @@ ex)
 		actions: (data) => {
 			switch (data["component-type"]) {
 				case "route":
+					plop.setHelper("route-component", (text) => {
+						const paths = text.split(".");
+
+						const componentName = paths
+							.map((path, index) => {
+								if (paths[index + 1] && paths[index + 1].startsWith("$")) {
+									return path.slice(0, -1);
+								}
+								if (path === "_index" || path.startsWith("$")) {
+									return "";
+								}
+								return path;
+							})
+							.join("-");
+
+						return `${componentName}-route`;
+					});
+
 					return [
 						{
 							type: "add",
-							path: "app/routes/{{route-name}}/route.tsx",
+							path: "app/routes/{{route-path}}/route.tsx",
 							templateFile: "./templates/route-component/template.tsx.hbs",
 						},
 						{
 							type: "add",
-							path: "app/routes/{{route-name}}/route.test.tsx",
+							path: "app/routes/{{route-path}}/route.test.tsx",
 							templateFile: "./templates/route-component/template.test.tsx.hbs",
 						},
 					];
 				case "feature":
+					plop.setHelper("feature-component", (text) => text.split("/").pop());
+
 					return [
 						{
 							type: "add",
-							path: "app/routes/{{feature-name}}.tsx",
+							path: "app/routes/{{feature-path}}.tsx",
 							templateFile: "./templates/feature-component/template.tsx.hbs",
 						},
 						{
 							type: "add",
-							path: "app/routes/{{feature-name}}.test.tsx",
+							path: "app/routes/{{feature-path}}.test.tsx",
 							templateFile:
 								"./templates/feature-component/template.test.tsx.hbs",
 						},
