@@ -8,8 +8,12 @@ export default function (plop) {
 				message: "which type of component you want to create?",
 				choices: [
 					{
-						name: "route",
-						value: "route",
+						name: "route from URL path",
+						value: "url-route",
+					},
+					{
+						name: "route from file path",
+						value: "file-route",
 					},
 					{
 						name: "feature",
@@ -18,10 +22,33 @@ export default function (plop) {
 				],
 			},
 			{
-				when: (data) => data["component-type"] === "route",
+				when: (data) => data["component-type"] === "url-route",
 				type: "input",
 				name: "route-path",
-				message: `What is component name?
+				message: `What is url path?
+
+ex)
+
+| URL you need to input | route file path    | create component name |
+|-----------------------|--------------------|-----------------------|
+| /users                | users._index       | UsersRoute            |
+| /users/posts          | users.posts._index | UsersPostsRoute       |
+| users/:id             | users.$id          | UserRoute             |
+
+?`,
+				validate: (value) => {
+					if (value.includes(".")) {
+						return "Error: url pattern should be like 'users/posts' or 'users/:id'";
+					}
+
+					return true;
+				},
+			},
+			{
+				when: (data) => data["component-type"] === "file-route",
+				type: "input",
+				name: "route-path",
+				message: `What is route path?
 
 ex)
 
@@ -63,7 +90,45 @@ ex)
 		],
 		actions: (data) => {
 			switch (data["component-type"]) {
-				case "route":
+				case "url-route": {
+					plop.setHelper("route-component", (text) => {
+						const paths = text.split("/");
+
+						const componentName = paths
+							.map((path, index) => {
+								if (paths[index + 1] && paths[index + 1].startsWith(":")) {
+									return path.slice(0, -1);
+								}
+							})
+							.join("-");
+
+						return `${componentName}-route`;
+					});
+
+					const urlPaths = data["route-path"].split("/");
+					const endPath = urlPaths.at(-1);
+
+					let routeFilePath = urlPaths.map((path) => path.replace(":", "$"));
+					if (!endPath.startsWith(":")) {
+						routeFilePath.push("_index");
+					}
+
+					routeFilePath = routeFilePath.join(".");
+
+					return [
+						{
+							type: "add",
+							path: `app/routes/${routeFilePath}/route.tsx`,
+							templateFile: "./templates/route-component/template.tsx.hbs",
+						},
+						{
+							type: "add",
+							path: `app/routes/${routeFilePath}/route.test.tsx`,
+							templateFile: "./templates/route-component/template.test.tsx.hbs",
+						},
+					];
+				}
+				case "file-route":
 					plop.setHelper("route-component", (text) => {
 						const paths = text.split(".");
 
