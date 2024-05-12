@@ -1,5 +1,5 @@
 export default function (plop) {
-	plop.setGenerator("remix-route-module", {
+	plop.setGenerator("create-remix-route-component", {
 		description: "Create remix route or feature component",
 		prompts: [
 			{
